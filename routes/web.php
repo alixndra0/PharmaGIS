@@ -27,6 +27,7 @@ use App\Http\Controllers\Auth\VerificationController;
 |
 */
 
+Route::middleware(['web'])->group(function () {
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -128,3 +129,4 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
 Route::resource('categories', CategoryController::class);
 Route::post('/categories/{category}/add-product', [CategoryController::class, 'addProduct'])->name('categories.addProduct');
 Route::delete('/categories/{category}/remove-product/{product}', [CategoryController::class, 'removeProduct'])->name('categories.removeProduct');
+});
