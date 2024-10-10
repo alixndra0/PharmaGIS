@@ -130,3 +130,18 @@ Route::resource('categories', CategoryController::class);
 Route::post('/categories/{category}/add-product', [CategoryController::class, 'addProduct'])->name('categories.addProduct');
 Route::delete('/categories/{category}/remove-product/{product}', [CategoryController::class, 'removeProduct'])->name('categories.removeProduct');
 });
+
+Route::get('/check-session', function () {
+    session_start(); // Just for testing
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        return 'Session is active.';
+    } else {
+        return 'Session is not active.';
+    }
+});
+
+Route::get('/test-redis', function () {
+    \Illuminate\Support\Facades\Redis::set('test_key', 'Hello World');
+    return \Illuminate\Support\Facades\Redis::get('test_key');
+});
+
